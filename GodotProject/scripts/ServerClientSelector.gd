@@ -1,3 +1,4 @@
+class_name ServerClientSelector
 extends Node
 
 @export
@@ -11,7 +12,10 @@ var ServerPanel : Panel;
 
 func ServerButtonClicked():
 	print("server button clicked!");
-	get_tree().root.add_child(ServerPrefab.instantiate());
+	var serverInstance = ServerPrefab.instantiate();
+	get_tree().root.add_child(serverInstance);
+	var server = serverInstance as Server;
+	server.PanelController = ServerPanel.get_script() as ServerPanelController
 	ServerPanel.set_process(true);
 	ServerPanel.show();
 	
