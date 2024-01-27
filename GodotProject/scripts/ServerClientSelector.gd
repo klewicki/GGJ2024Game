@@ -32,6 +32,9 @@ func ClientButtonClicked():
 	get_tree().root.add_child(clientInstance);
 	var client = clientInstance as Client;
 	client.PanelController = ClientPanel.get_script() as ClientPanelController
+	ClientPanel.set_process(true);
+	ClientPanel.show();
+	
 	ClientServerSelectionPanel.set_process(false);
 	ClientServerSelectionPanel.hide();
 	return;

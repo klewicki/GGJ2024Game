@@ -14,6 +14,9 @@ func _ready():
 	if(error):
 		print("Error creating client");
 		PanelController.DisplayDebugMessage("Error creating client");
+	else:
+		print("Client created successfully");
+		PanelController.DisplayDebugMessage("Client created successfully");
 	multiplayer.multiplayer_peer = Peer;
 
 func ConnectedToServer():
