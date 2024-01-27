@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ba0cue6ojxyu8"]
+[gd_scene load_steps=3 format=3 uid="uid://ba0cue6ojxyu8"]
 
 [ext_resource type="Script" path="res://ServerClientSelector.gd" id="1_4j5qa"]
+[ext_resource type="Script" path="res://ServerPanelController.gd" id="2_gb04x"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ClientServerSelectionPanel" type="Panel" parent="."]
+[node name="ClientServerSelectionPanel" type="Panel" parent="." node_paths=PackedStringArray("ClientServerSelectionPanel", "ServerPanel")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,8 +19,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4j5qa")
+ClientServerSelectionPanel = NodePath(".")
+ServerPanel = NodePath("../ServerPanel")
 
-[node name="PanelContainer" type="VBoxContainer" parent="ClientServerSelectionPanel"]
+[node name="ClientServerSelectionPanelContainer" type="VBoxContainer" parent="ClientServerSelectionPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
@@ -29,22 +32,58 @@ anchor_bottom = 0.7
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="ClientServerSelectionPanel/PanelContainer"]
+[node name="Label" type="Label" parent="ClientServerSelectionPanel/ClientServerSelectionPanelContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-text = "Is this a client or server device?"
+text = "                     Is this a client or server device?                "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ServerButton" type="Button" parent="ClientServerSelectionPanel/PanelContainer"]
+[node name="ServerButton" type="Button" parent="ClientServerSelectionPanel/ClientServerSelectionPanelContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Server"
 
-[node name="ClientButton" type="Button" parent="ClientServerSelectionPanel/PanelContainer"]
+[node name="ClientButton" type="Button" parent="ClientServerSelectionPanel/ClientServerSelectionPanelContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 text = "Client"
 
-[connection signal="button_up" from="ClientServerSelectionPanel/PanelContainer/ServerButton" to="ClientServerSelectionPanel" method="ServerButtonClicked"]
-[connection signal="button_up" from="ClientServerSelectionPanel/PanelContainer/ClientButton" to="ClientServerSelectionPanel" method="ClientButtonClicked"]
+[node name="ServerPanel" type="Panel" parent="."]
+process_mode = 4
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_gb04x")
+
+[node name="ServerPanelVBoxContainer" type="VBoxContainer" parent="ServerPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.2
+anchor_right = 0.7
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoLabel" type="Label" parent="ServerPanel/ServerPanelVBoxContainer"]
+layout_mode = 2
+text = "Waiting for players to join."
+horizontal_alignment = 1
+
+[node name="PlayerCountLabel" type="Label" parent="ServerPanel/ServerPanelVBoxContainer"]
+layout_mode = 2
+text = "Current players: 0"
+horizontal_alignment = 1
+
+[node name="StartGameButton" type="Button" parent="ServerPanel/ServerPanelVBoxContainer"]
+layout_mode = 2
+text = "Start game"
+
+[connection signal="button_up" from="ClientServerSelectionPanel/ClientServerSelectionPanelContainer/ServerButton" to="ClientServerSelectionPanel" method="ServerButtonClicked"]
+[connection signal="button_up" from="ClientServerSelectionPanel/ClientServerSelectionPanelContainer/ClientButton" to="ClientServerSelectionPanel" method="ClientButtonClicked"]
+[connection signal="button_up" from="ServerPanel/ServerPanelVBoxContainer/StartGameButton" to="ServerPanel" method="StartGameClicked"]
