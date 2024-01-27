@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba0cue6ojxyu8"]
+[gd_scene load_steps=5 format=3 uid="uid://ba0cue6ojxyu8"]
 
 [ext_resource type="Script" path="res://Scripts/ServerClientSelector.gd" id="1_e0jjg"]
+[ext_resource type="PackedScene" uid="uid://daw3q7616k7ys" path="res://Prefabs/ServerPrefab.tscn" id="2_agmkl"]
 [ext_resource type="Script" path="res://Scripts/ServerPanelController.gd" id="2_os6k0"]
 [ext_resource type="PackedScene" uid="uid://hd7jkwfwvg6w" path="res://scenes/gameplay.tscn" id="3_qiplq"]
 
@@ -20,6 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_e0jjg")
+ServerPrefab = ExtResource("2_agmkl")
 ClientServerSelectionPanel = NodePath(".")
 ServerPanel = NodePath("../ServerPanel")
 

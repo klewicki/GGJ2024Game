@@ -1,14 +1,17 @@
 extends Node
 
 @export
-var ClientServerSelectionPanel : Panel
+var ServerPrefab : PackedScene;
 
 @export
-var ServerPanel : Panel
+var ClientServerSelectionPanel : Panel;
+
+@export
+var ServerPanel : Panel;
 
 func ServerButtonClicked():
 	print("server button clicked!");
-	#TODO: do logic
+	get_tree().root.add_child(ServerPrefab.instantiate());
 	ServerPanel.set_process(true);
 	ServerPanel.show();
 	
