@@ -31,8 +31,8 @@ func ServerDisconnected():
 	print("Server disconnected!");
 	DisplayDebugMessage("Server disconnected!");
 	
-	func DisplayDebugMessage(message : String):
-		if(PanelController != null):
-			PanelController.DisplayDebugMessage(message);
-		else:
-			print("PanelController is null!");
+func DisplayDebugMessage(message : String):
+	if(PanelController != null):
+		PanelController.DisplayDebugMessage(message);
+	else:
+		print("PanelController is null!");
