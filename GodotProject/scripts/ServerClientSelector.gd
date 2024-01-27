@@ -34,6 +34,7 @@ func ClientButtonClicked():
 	client.PanelController = ClientPanel.get_script() as ClientPanelController
 	ClientPanel.set_process(true);
 	ClientPanel.show();
+	client.Start();
 	
 	ClientServerSelectionPanel.set_process(false);
 	ClientServerSelectionPanel.hide();
