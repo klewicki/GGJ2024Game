@@ -9,8 +9,10 @@ func Start():
 	print("starting up client");
 	Peer = ENetMultiplayerPeer.new(); 
 	multiplayer.connected_to_server.connect(ConnectedToServer);
+	multiplayer.connection_failed.connect(ConnectionFailed);
+	multiplayer.server_disconnected.connect(ServerDisconnected);
 	
-	var error = Peer.create_client("192.168.0.1", Server.PORT);
+	var error = Peer.create_client("127.0.0.1", Server.PORT);
 	if(error):
 		print("Error creating client");
 		DisplayDebugMessage("Error creating client");
@@ -35,4 +37,4 @@ func DisplayDebugMessage(message : String):
 	if(PanelController != null):
 		PanelController.DisplayDebugMessage(message);
 	else:
-		print("PanelController is null!");
+		print("PanelController is null in Client!");

@@ -22,4 +22,6 @@ func OnPlayerConnected(playerId : int):
 		PlayerCount += 1;
 		if(PanelController != null):
 			PanelController.UpdatePlayerCount(PlayerCount);
+		else:
+			print("Panel controller is null in Server!");
 		#TODO: implement logic
