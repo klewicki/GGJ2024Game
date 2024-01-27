@@ -1,9 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://c4nish8amg1xm"]
 
-[ext_resource type="Texture2D" uid="uid://dsagfm8gpqqar" path="res://sprites/tilesheets/pirates_tilesheet.png" id="1_lntkg"]
+[ext_resource type="Texture2D" uid="uid://dsagfm8gpqqar" path="res://sprites/Tilesheets/PiratesTilesheet.png" id="1_yon6s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rhfbk"]
-texture = ExtResource("1_lntkg")
+texture = ExtResource("1_yon6s")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
