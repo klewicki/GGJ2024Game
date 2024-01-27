@@ -5,7 +5,7 @@ var PanelController : ServerPanelController;
 
 const PORT : int =  50000;
 const MAX_CLIENTS : int = 5;
-var Peer : ENetMultiplayerPeer
+var Peer : ENetMultiplayerPeer;
 var PlayerCount : int = 0;
 
 func _ready():

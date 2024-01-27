@@ -3,6 +3,8 @@ extends Node
 
 @export
 var ServerPrefab : PackedScene;
+@export
+var ClientPrefab : PackedScene;
 
 @export
 var ClientServerSelectionPanel : Panel;
@@ -25,7 +27,8 @@ func ServerButtonClicked():
 	
 func ClientButtonClicked():
 	print("client button clicked!");
-	#TODO: do logic
+	var clientInstance = ClientPrefab.instantiate();
+	get_tree().root.add_child(clientInstance);
 	ClientServerSelectionPanel.set_process(false);
 	ClientServerSelectionPanel.hide();
 	return;
