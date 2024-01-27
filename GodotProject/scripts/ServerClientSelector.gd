@@ -19,5 +19,6 @@ func ServerButtonClicked():
 func ClientButtonClicked():
 	print("client button clicked!");
 	#TODO: do logic
-	#TODO: hide panel
+	ClientServerSelectionPanel.set_process(false);
+	ClientServerSelectionPanel.hide();
 	return;

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba0cue6ojxyu8"]
+[gd_scene load_steps=4 format=3 uid="uid://ba0cue6ojxyu8"]
 
-[ext_resource type="Script" path="res://ServerClientSelector.gd" id="1_4j5qa"]
-[ext_resource type="Script" path="res://ServerPanelController.gd" id="2_gb04x"]
+[ext_resource type="Script" path="res://scripts/ServerClientSelector.gd" id="1_e0jjg"]
+[ext_resource type="Script" path="res://scripts/ServerPanelController.gd" id="2_os6k0"]
+[ext_resource type="PackedScene" uid="uid://hd7jkwfwvg6w" path="res://scenes/gameplay.tscn" id="3_qiplq"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -18,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4j5qa")
+script = ExtResource("1_e0jjg")
 ClientServerSelectionPanel = NodePath(".")
 ServerPanel = NodePath("../ServerPanel")
 
@@ -49,8 +50,7 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "Client"
 
-[node name="ServerPanel" type="Panel" parent="."]
-process_mode = 4
+[node name="ServerPanel" type="Panel" parent="." node_paths=PackedStringArray("ServerPanel")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -58,7 +58,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_gb04x")
+script = ExtResource("2_os6k0")
+GameplayScene = ExtResource("3_qiplq")
+ServerPanel = NodePath(".")
 
 [node name="ServerPanelVBoxContainer" type="VBoxContainer" parent="ServerPanel"]
 layout_mode = 1
