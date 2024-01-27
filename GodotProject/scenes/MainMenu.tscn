@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ba0cue6ojxyu8"]
+[gd_scene load_steps=7 format=3 uid="uid://ba0cue6ojxyu8"]
 
 [ext_resource type="Script" path="res://Scripts/ServerClientSelector.gd" id="1_e0jjg"]
 [ext_resource type="PackedScene" uid="uid://daw3q7616k7ys" path="res://Prefabs/ServerPrefab.tscn" id="2_agmkl"]
 [ext_resource type="Script" path="res://Scripts/ServerPanelController.gd" id="2_os6k0"]
 [ext_resource type="PackedScene" uid="uid://dmm1atu8aj5wx" path="res://Prefabs/ClientPrefab.tscn" id="3_no7ip"]
 [ext_resource type="PackedScene" uid="uid://hd7jkwfwvg6w" path="res://scenes/gameplay.tscn" id="3_qiplq"]
+[ext_resource type="Script" path="res://Scripts/ClientPanelController.gd" id="6_88563"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -14,7 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ClientServerSelectionPanel" type="Panel" parent="." node_paths=PackedStringArray("ClientServerSelectionPanel", "ServerPanel")]
+[node name="ClientServerSelectionPanel" type="Panel" parent="." node_paths=PackedStringArray("ClientServerSelectionPanel", "ClientPanel", "ServerPanel")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +26,7 @@ script = ExtResource("1_e0jjg")
 ServerPrefab = ExtResource("2_agmkl")
 ClientPrefab = ExtResource("3_no7ip")
 ClientServerSelectionPanel = NodePath(".")
+ClientPanel = NodePath("../ClientPanel")
 ServerPanel = NodePath("../ServerPanel")
 
 [node name="ClientServerSelectionPanelContainer" type="VBoxContainer" parent="ClientServerSelectionPanel"]
@@ -89,6 +91,25 @@ horizontal_alignment = 1
 [node name="StartGameButton" type="Button" parent="ServerPanel/ServerPanelVBoxContainer"]
 layout_mode = 2
 text = "Start game"
+
+[node name="ClientPanel" type="Panel" parent="." node_paths=PackedStringArray("DebugLabel")]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_88563")
+DebugLabel = NodePath("VBoxContainer/DebugLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ClientPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugLabel" type="Label" parent="ClientPanel/VBoxContainer"]
+layout_mode = 2
 
 [connection signal="button_up" from="ClientServerSelectionPanel/ClientServerSelectionPanelContainer/ServerButton" to="ClientServerSelectionPanel" method="ServerButtonClicked"]
 [connection signal="button_up" from="ClientServerSelectionPanel/ClientServerSelectionPanelContainer/ClientButton" to="ClientServerSelectionPanel" method="ClientButtonClicked"]

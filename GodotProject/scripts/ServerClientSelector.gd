@@ -8,7 +8,8 @@ var ClientPrefab : PackedScene;
 
 @export
 var ClientServerSelectionPanel : Panel;
-
+@export
+var ClientPanel : Panel;
 @export
 var ServerPanel : Panel;
 
@@ -29,6 +30,8 @@ func ClientButtonClicked():
 	print("client button clicked!");
 	var clientInstance = ClientPrefab.instantiate();
 	get_tree().root.add_child(clientInstance);
+	var client = clientInstance as Client;
+	client.PanelController = ClientPanel.get_script() as ClientPanelController
 	ClientServerSelectionPanel.set_process(false);
 	ClientServerSelectionPanel.hide();
 	return;
