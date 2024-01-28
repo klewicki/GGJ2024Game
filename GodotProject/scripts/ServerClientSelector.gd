@@ -10,6 +10,8 @@ var ClientServerSelectionPanel : Panel;
 var ClientPanel : Panel;
 @export
 var ServerPanel : Panel;
+@export
+var ServerAdress : LineEdit;
 
 func ServerButtonClicked():
 	print("server button clicked!");
@@ -33,6 +35,7 @@ func ClientButtonClicked():
 	var clientServer = clientServerInstance as ClientServer;
 	var clientPanelController = ClientPanel as ClientPanelController;
 	clientServer.ClientPanel = clientPanelController;
+	clientServer.ServerIPAddress = ServerAdress.text;
 	clientPanelController.ClientServerInstance = clientServerInstance;
 	ClientPanel.set_process(true);
 	ClientPanel.show();

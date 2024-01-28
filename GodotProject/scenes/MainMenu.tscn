@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/ServerClientSelector.gd" id="1_e0jjg"]
 [ext_resource type="Script" path="res://Scripts/ServerPanelController.gd" id="2_os6k0"]
 [ext_resource type="PackedScene" uid="uid://dmm1atu8aj5wx" path="res://Prefabs/ClientServerPrefab.tscn" id="3_no7ip"]
-[ext_resource type="PackedScene" path="res://scenes/Gameplay.tscn" id="4_xbs5o"]
+[ext_resource type="PackedScene" uid="uid://hd7jkwfwvg6w" path="res://scenes/Gameplay.tscn" id="4_xbs5o"]
 [ext_resource type="Script" path="res://Scripts/ClientPanelController.gd" id="6_88563"]
 
 [node name="MainMenu" type="Control"]
@@ -14,7 +14,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ClientServerSelectionPanel" type="Panel" parent="." node_paths=PackedStringArray("ClientServerSelectionPanel", "ClientPanel", "ServerPanel")]
+[node name="ClientServerSelectionPanel" type="Panel" parent="." node_paths=PackedStringArray("ClientServerSelectionPanel", "ClientPanel", "ServerPanel", "ServerAdress")]
+custom_minimum_size = Vector2(250, 25)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,6 +27,7 @@ ClientServerPrefab = ExtResource("3_no7ip")
 ClientServerSelectionPanel = NodePath(".")
 ClientPanel = NodePath("../ClientPanel")
 ServerPanel = NodePath("../ServerPanel")
+ServerAdress = NodePath("ClientServerSelectionPanelContainer/LineEdit")
 
 [node name="ClientServerSelectionPanelContainer" type="VBoxContainer" parent="ClientServerSelectionPanel"]
 layout_mode = 1
@@ -46,13 +48,28 @@ vertical_alignment = 1
 
 [node name="ServerButton" type="Button" parent="ClientServerSelectionPanel/ClientServerSelectionPanelContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Server"
 
 [node name="ClientButton" type="Button" parent="ClientServerSelectionPanel/ClientServerSelectionPanelContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Client"
+
+[node name="Label2" type="Label" parent="ClientServerSelectionPanel/ClientServerSelectionPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Server address (fill for client only):"
+
+[node name="LineEdit" type="LineEdit" parent="ClientServerSelectionPanel/ClientServerSelectionPanelContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "127.0.0.1"
+placeholder_text = "127.0.0.1"
 
 [node name="ServerPanel" type="Panel" parent="." node_paths=PackedStringArray("ServerPanel", "PlayerCountLabel")]
 visible = false
