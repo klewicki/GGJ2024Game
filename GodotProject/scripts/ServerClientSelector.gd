@@ -2,9 +2,7 @@ class_name ServerClientSelector
 extends Node
 
 @export
-var ServerPrefab : PackedScene;
-@export
-var ClientPrefab : PackedScene;
+var ClientServerPrefab : PackedScene;
 
 @export
 var ClientServerSelectionPanel : Panel;
@@ -15,14 +13,14 @@ var ServerPanel : Panel;
 
 func ServerButtonClicked():
 	print("server button clicked!");
-	var serverInstance = ServerPrefab.instantiate();
-	get_tree().root.add_child(serverInstance);
-	var server = serverInstance as Server;
+	var clientServerInstance = ClientServerPrefab.instantiate();
+	get_tree().root.add_child(clientServerInstance);
+	var clientServer = clientServerInstance as ClientServer;
 	var serverPanelController = ServerPanel as ServerPanelController;
-	server.PanelController = serverPanelController;
+	clientServer.ServerPanel = serverPanelController;
 	ServerPanel.set_process(true);
 	ServerPanel.show();
-	server.Start()
+	clientServer.StartServer();
 	
 	ClientServerSelectionPanel.set_process(false);
 	ClientServerSelectionPanel.hide();
@@ -30,15 +28,15 @@ func ServerButtonClicked():
 	
 func ClientButtonClicked():
 	print("client button clicked!");
-	var clientInstance = ClientPrefab.instantiate();
-	get_tree().root.add_child(clientInstance);
-	var client = clientInstance as Client;
+	var clientServerInstance = ClientServerPrefab.instantiate();
+	get_tree().root.add_child(clientServerInstance);
+	var clientServer = clientServerInstance as ClientServer;
 	var clientPanelController = ClientPanel as ClientPanelController;
-	client.PanelController = clientPanelController;
-	clientPanelController.ClientInstance = client;
+	clientServer.ClientPanel = clientPanelController;
+	clientPanelController.ClientServerInstance = clientServerInstance;
 	ClientPanel.set_process(true);
 	ClientPanel.show();
-	client.Start();
+	clientServer.StartClient();
 	
 	ClientServerSelectionPanel.set_process(false);
 	ClientServerSelectionPanel.hide();

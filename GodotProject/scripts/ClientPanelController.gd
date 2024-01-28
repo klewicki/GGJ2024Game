@@ -11,13 +11,13 @@ var Power1Button : Button;
 @export
 var Power2Button : Button;
 
-var ClientInstance : Client;
+var ClientServerInstance : ClientServer;
 
 func DisplayDebugMessage(message : String):
 	DebugLabel.text += message + "\n";
 	
 func UsePower(powerId : int):
-	ClientInstance.UsePower(powerId);
+	ClientServerInstance.UsePower(powerId);
 	return;
 	
 func SetPowerButtonEnabled(button : int, enabled : bool):

@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ba0cue6ojxyu8"]
+[gd_scene load_steps=6 format=3 uid="uid://ba0cue6ojxyu8"]
 
 [ext_resource type="Script" path="res://Scripts/ServerClientSelector.gd" id="1_e0jjg"]
-[ext_resource type="PackedScene" uid="uid://daw3q7616k7ys" path="res://Prefabs/ServerPrefab.tscn" id="2_agmkl"]
 [ext_resource type="Script" path="res://Scripts/ServerPanelController.gd" id="2_os6k0"]
-[ext_resource type="PackedScene" uid="uid://dmm1atu8aj5wx" path="res://Prefabs/ClientPrefab.tscn" id="3_no7ip"]
+[ext_resource type="PackedScene" uid="uid://dmm1atu8aj5wx" path="res://Prefabs/ClientServerPrefab.tscn" id="3_no7ip"]
 [ext_resource type="PackedScene" uid="uid://hd7jkwfwvg6w" path="res://scenes/gameplay.tscn" id="3_qiplq"]
 [ext_resource type="Script" path="res://Scripts/ClientPanelController.gd" id="6_88563"]
 
@@ -23,8 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_e0jjg")
-ServerPrefab = ExtResource("2_agmkl")
-ClientPrefab = ExtResource("3_no7ip")
+ClientServerPrefab = ExtResource("3_no7ip")
 ClientServerSelectionPanel = NodePath(".")
 ClientPanel = NodePath("../ClientPanel")
 ServerPanel = NodePath("../ServerPanel")
