@@ -10,6 +10,7 @@ var Peer : ENetMultiplayerPeer;
 #client side stuff
 var ClientPanel : ClientPanelController;
 var ClientId : int;
+var ServerIPAddress: String;
 
 #server side stuff
 var ServerPanel : ServerPanelController;
@@ -26,7 +27,7 @@ func StartClient():
 	multiplayer.connection_failed.connect(ConnectionFailed);
 	multiplayer.server_disconnected.connect(ServerDisconnected);
 	
-	var error = Peer.create_client("127.0.0.1", PORT);
+	var error = Peer.create_client(ServerIPAddress, PORT);
 	if(error):
 		print("Error creating client");
 		DisplayDebugMessage("Error creating client");
