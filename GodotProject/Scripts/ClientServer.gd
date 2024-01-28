@@ -1,7 +1,7 @@
 class_name ClientServer
 extends Node
 
-const PORT : int =  50000;
+const PORT : int =  5555;
 const MAX_CLIENTS : int = 5;
 
 #common stuff
