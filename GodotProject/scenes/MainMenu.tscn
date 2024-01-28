@@ -119,6 +119,7 @@ layout_mode = 2
 text = "Start game"
 
 [node name="ClientPanel" type="Panel" parent="." node_paths=PackedStringArray("DebugLabel", "Power0Button", "Power1Button", "Power2Button")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
