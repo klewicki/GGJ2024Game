@@ -21,9 +21,9 @@ func _ready():
 	attackBoxRight.body_exited.connect(OnAttackBoxRightExit);
 #
 
-func _process():
+func _process(_delta):
 #
-
+	pass
 #
 
 func Attack(direction: Vector2):
