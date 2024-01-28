@@ -2,8 +2,10 @@ extends RigidBody2D
 
 var viewportRect = Vector2.ZERO;
 var direction = Vector2.ZERO;
+var lastDirection = Vector2.ZERO;
 
 @onready var moveController = $MoveController 
+@onready var attackController = $AttackController
 
 func _process(_delta):
 #
@@ -31,6 +33,10 @@ func UpdateDirectionInput():
 	
 	if(Input.is_action_pressed("MoveRight")):
 		direction.x += 1;
+		
+	if(direction.x != 0 || direction.y != 0):
+		lastDirection = direction;
+	
 # UpdateDirectionInput()
 
 func GetAttackInput() -> bool:
@@ -40,5 +46,6 @@ func GetAttackInput() -> bool:
 func HandleAttack():
 #
 	if(GetAttackInput()):
-		print("Attack");
+		attackController.Attack(lastDirection);
+		
 # HandleAttack()

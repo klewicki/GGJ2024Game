@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d0rj7gi4cryxq"]
 
 [ext_resource type="Script" path="res://Scripts/EnemyController.gd" id="1_12d8r"]
-[ext_resource type="Texture2D" uid="uid://cx30bhomyh43s" path="res://Sprites/Characters/Player.png" id="1_iosvw"]
+[ext_resource type="Texture2D" uid="uid://cr217jitxlpdn" path="res://Sprites/Characters/MrNegative.png" id="2_8wjju"]
 [ext_resource type="PackedScene" uid="uid://chsdx2k7j1msh" path="res://Components/MoveController.tscn" id="3_mh252"]
 [ext_resource type="PackedScene" uid="uid://8j6spyu4rhxh" path="res://Components/HealthController.tscn" id="4_d2gql"]
 
@@ -9,7 +9,7 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_iosvw")
+"texture": ExtResource("2_8wjju")
 }],
 "loop": true,
 "name": &"Idle",

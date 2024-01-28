@@ -13,9 +13,11 @@ func SubtractHealth(amount: float):
 #
 	if(CurrentHealth <= 0):
 		return;
-		
+
 	CurrentHealth -= amount;
-	
+
+	print("Subtracting Health! Current Health: " + str(CurrentHealth));
+		
 	if(CurrentHealth <= 0):
 	#
 		HealthDepleted.emit();
