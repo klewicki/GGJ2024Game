@@ -54,7 +54,7 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "Client"
 
-[node name="ServerPanel" type="Panel" parent="." node_paths=PackedStringArray("ServerPanel")]
+[node name="ServerPanel" type="Panel" parent="." node_paths=PackedStringArray("ServerPanel", "PlayerCountLabel")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -65,6 +65,7 @@ grow_vertical = 2
 script = ExtResource("2_os6k0")
 GameplayScene = ExtResource("4_xbs5o")
 ServerPanel = NodePath(".")
+PlayerCountLabel = NodePath("ServerPanelVBoxContainer/InfoLabel")
 
 [node name="ServerPanelVBoxContainer" type="VBoxContainer" parent="ServerPanel"]
 layout_mode = 1
