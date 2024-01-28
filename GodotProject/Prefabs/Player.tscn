@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dtgidhlov7ef4"]
+[gd_scene load_steps=13 format=3 uid="uid://dtgidhlov7ef4"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_s85ai"]
 [ext_resource type="Texture2D" uid="uid://cx30bhomyh43s" path="res://Sprites/Characters/Player.png" id="2_6n832"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b4yckqua413n" path="res://Sprites/Characters/Player/player_up.png" id="5_sqs5y"]
 [ext_resource type="PackedScene" uid="uid://be56goflb0lrn" path="res://Components/AttackController.tscn" id="5_t0d7w"]
 [ext_resource type="Script" path="res://Scripts/Components/CharacterAnimationController.gd" id="6_1vpkn"]
+[ext_resource type="PackedScene" uid="uid://ba3oxll5vsmju" path="res://Components/InputControllerLocal.tscn" id="10_nilcx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rtbbd"]
 radius = 8.0
@@ -70,3 +71,5 @@ script = ExtResource("6_1vpkn")
 [node name="HealthController" parent="." instance=ExtResource("4_swtf8")]
 
 [node name="AttackController" parent="." instance=ExtResource("5_t0d7w")]
+
+[node name="InputController" parent="." instance=ExtResource("10_nilcx")]

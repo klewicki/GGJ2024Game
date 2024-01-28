@@ -11,11 +11,11 @@
 [node name="PiratesTilemap" parent="." instance=ExtResource("1_3tyhg")]
 position = Vector2(-112, -72)
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("2_ebjet")]
+[node name="Player" parent="." instance=ExtResource("2_ebjet")]
 z_index = 100
 position = Vector2(-80, -32)
 
-[node name="BaseEnemy" parent="." groups=["Enemies"] instance=ExtResource("3_cljq4")]
+[node name="BaseEnemy" parent="." instance=ExtResource("3_cljq4")]
 position = Vector2(80, 40)
 scale = Vector2(0.981982, 1.00308)
 debugStates = true
