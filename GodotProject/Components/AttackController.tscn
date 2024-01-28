@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/Components/AttackController.gd" id="1_rov1y"]
 [ext_resource type="Texture2D" uid="uid://bnfvinkdkav7x" path="res://Sprites/VFX/transparent.png" id="2_jc8c3"]
-[ext_resource type="Texture2D" uid="uid://d2i62x3dy7q5m" path="res://Sprites/VFX/Swoosh/swoosh1f0.png" id="3_18hgr"]
-[ext_resource type="Texture2D" uid="uid://dgahlw4xwywty" path="res://Sprites/VFX/Swoosh/swoosh1f1.png" id="4_i2lv8"]
-[ext_resource type="Texture2D" uid="uid://bi1vjc1u8dmh" path="res://Sprites/VFX/Swoosh/swoosh1f2.png" id="5_wqctw"]
-[ext_resource type="Texture2D" uid="uid://4kty3mv803ib" path="res://Sprites/VFX/Swoosh/swoosh1f3.png" id="6_u5ohn"]
-[ext_resource type="Texture2D" uid="uid://frwis1c8xqgp" path="res://Sprites/VFX/Swoosh/swoosh1f4.png" id="7_urdll"]
-[ext_resource type="Texture2D" uid="uid://j658dyhilcs7" path="res://Sprites/VFX/Swoosh/swoosh1f5.png" id="8_vdnq3"]
+[ext_resource type="Texture2D" uid="uid://b743ms4l3csby" path="res://Sprites/VFX/swoosh3/swoosh3f0.png" id="3_74wy4"]
+[ext_resource type="Texture2D" uid="uid://dr513ykq2oa67" path="res://Sprites/VFX/swoosh3/swoosh3f1.png" id="4_4kff4"]
+[ext_resource type="Texture2D" uid="uid://b7xrn378028ix" path="res://Sprites/VFX/swoosh3/swoosh3f2.png" id="5_3txtf"]
+[ext_resource type="Texture2D" uid="uid://blsyymo060ua7" path="res://Sprites/VFX/swoosh3/swoosh3f3.png" id="6_f4olj"]
+[ext_resource type="Texture2D" uid="uid://bnw0v5whfp3a2" path="res://Sprites/VFX/swoosh3/swoosh3f4.png" id="7_4rt3d"]
+[ext_resource type="Texture2D" uid="uid://duu0dvs8b7j0b" path="res://Sprites/VFX/swoosh3/swoosh3f5.png" id="8_hle4c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dquio"]
 size = Vector2(8, 20)
@@ -30,22 +30,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_18hgr")
+"texture": ExtResource("3_74wy4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_i2lv8")
+"texture": ExtResource("4_4kff4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_wqctw")
+"texture": ExtResource("5_3txtf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_u5ohn")
+"texture": ExtResource("6_f4olj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_urdll")
+"texture": ExtResource("7_4rt3d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_vdnq3")
+"texture": ExtResource("8_hle4c")
 }],
 "loop": false,
 "name": &"Swoosh",
@@ -54,7 +54,9 @@ animations = [{
 
 [node name="AttackController" type="Node2D"]
 script = ExtResource("1_rov1y")
+Damage = null
 PushForce = 2000.0
+Type = null
 
 [node name="AttackBoxRight" type="Area2D" parent="."]
 collision_mask = 6
@@ -85,6 +87,24 @@ position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_ossgn")
 
 [node name="SwooshRight" type="AnimatedSprite2D" parent="."]
-position = Vector2(13, 0)
+position = Vector2(17, 0)
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_kc6px")
+animation = &"NoSwoosh"
+
+[node name="SwooshDown" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 18)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_kc6px")
+
+[node name="SwooshLeft" type="AnimatedSprite2D" parent="."]
+position = Vector2(-17, 0)
+rotation = 3.14159
+scale = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_kc6px")
+
+[node name="SwooshUp" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -17)
+rotation = 4.71239
 sprite_frames = SubResource("SpriteFrames_kc6px")
 animation = &"NoSwoosh"

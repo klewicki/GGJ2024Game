@@ -6,11 +6,17 @@ var lastDirection = Vector2.ZERO;
 
 @onready var moveController = $MoveController 
 @onready var attackController = $AttackController
+@onready var animatedSprite = $AnimatedSprite2D
+
+func _ready():
+	lastDirection = Vector2.DOWN;
 
 func _process(_delta):
 #
 	UpdateDirectionInput();
 	HandleAttack();
+	
+	animatedSprite.PlayAnimation(lastDirection);
 # _process()	
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):

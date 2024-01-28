@@ -17,6 +17,9 @@ var enemiesBelow: Array[Node2D];
 @onready var attackBoxDown = $AttackBoxDown
 
 @onready var swooshRight = $SwooshRight
+@onready var swooshLeft = $SwooshLeft
+@onready var swooshUp = $SwooshUp
+@onready var swooshDown = $SwooshDown
 
 func _ready():
 #
@@ -33,6 +36,9 @@ func _ready():
 	attackBoxDown.body_exited.connect(OnAttackBoxDownExit);
 	
 	swooshRight.animation_finished.connect(OnAnimationFinished);
+	swooshLeft.animation_finished.connect(OnAnimationFinished);
+	swooshUp.animation_finished.connect(OnAnimationFinished);
+	swooshDown.animation_finished.connect(OnAnimationFinished);
 #
 
 func _process(_delta):
@@ -66,8 +72,25 @@ func Attack(direction: Vector2):
 
 func OnAnimationFinished():
 #
-	swooshRight.animation = "NoSwoosh";
+	var noSwooshAnim = "NoSwoosh";
+
+	swooshRight.animation = noSwooshAnim;
 	swooshRight.stop();
+	
+	swooshLeft.animation = noSwooshAnim;
+	swooshLeft.stop();
+	
+	swooshUp.animation = noSwooshAnim;
+	swooshUp.stop();
+	
+	swooshDown.animation = noSwooshAnim;
+	swooshDown.stop();
+#
+
+func PlaySwoosh(swoosh: AnimatedSprite2D):
+#
+	swoosh.animation = "Swoosh";
+	swoosh.play();
 #
 
 func MeleeAttack(direction: Vector2):
@@ -76,20 +99,25 @@ func MeleeAttack(direction: Vector2):
 	#
 		DealDamageToEnemies(enemiesOnTheRight, direction);
 		
-		swooshRight.animation = "Swoosh";
-		swooshRight.play();
+		PlaySwoosh(swooshRight);
 	#
 	elif(direction.x < 0):
 	#
 		DealDamageToEnemies(enemiesOnTheLeft, direction);
+		
+		PlaySwoosh(swooshLeft);
 	#
 	elif(direction.y < 0):
 	#
 		DealDamageToEnemies(enemiesAbove, direction);
+		
+		PlaySwoosh(swooshUp);
 	#
 	elif(direction.y > 0):
 	#
 		DealDamageToEnemies(enemiesBelow, direction);
+		
+		PlaySwoosh(swooshDown);
 	#
 #
 
@@ -102,7 +130,7 @@ func DealDamageToEnemies(enemies: Array[Node2D], direction: Vector2):
 	
 		if(enemy is RigidBody2D):
 		#
-			print(direction * PushForce);
+			print(direction * PushForce);0
 			enemy.apply_force(direction * PushForce);
 		#
 		
