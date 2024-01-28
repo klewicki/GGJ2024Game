@@ -21,6 +21,8 @@ enum EnemyType {Melee, Range}
 @onready var healthController = $HealthController
 @onready var animatedSprite = $AnimatedSprite2D
 
+var player: Node2D
+
 var wasStopped = false
 
 var direction = Vector2.ZERO
@@ -37,10 +39,27 @@ func _ready():
 # _ready()
 
 func _process(delta):
+#
 	HandleState();
 	pass
+#
+
+func _physics_process(delta):
+#
+	#Godot Fucking Sucks That Why I Use This Line,
+	#Basically... the Godot docs states that I should not be manipulating RB velocity outside of _integrate_forces method
+	#But!
+	#Integrate forces method is only invoked when there is a physics change on the object. Sooooo...
+	#In order to be able to only add velocity when the player is being chased, I need to invoke the _integrate_forces manually by doing some miniscule physics change on the object constantly. 
+	#making it  basically a glorified _physics_process method in which I can manipulate velocity safely with the Physics2D Engine
+	#Probably there is a better way of doing this, but it's my third  day in Godot, so fuck it.  
+	apply_force(Vector2(0.000000000000000001, 0));
+#
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
+#
+	print("Integrate Forces");
+
 	if(currentState == EnemyState.Hurt && !wasStopped):
 	#
 		wasStopped = true;
@@ -49,10 +68,31 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	
 	if(currentState != EnemyState.Hurt):
 	#
-		wasStopped = false;
-		state.linear_velocity = moveController.GetVelocityForDirection(direction);
-	#
+		print("Not Hurt");
 	
+		wasStopped = false;
+		
+		if(currentState == EnemyState.Chasing):
+			state.linear_velocity = moveController.GetVelocityForDirection(direction);
+			
+	#
+# _integrate_forces
+	
+func GetPlayerPosition() -> Vector2:
+#
+	if(player == null):
+		player = get_tree().get_nodes_in_group("Player")[0];
+	
+	return player.global_position;
+#
+
+func GetDirectionTowardsPlayer() -> Vector2:
+#
+	var playerPosition = GetPlayerPosition();
+	
+	return (playerPosition - position).normalized();
+#
+
 func HandleState():
 #
 	if(healthController.CurrentHealth <= 0):
@@ -65,8 +105,10 @@ func HandleState():
 	#
 		EnemyState.Idle:
 			Debug("Enemy State: Idle");
+			LookingForPlayer();
 		EnemyState.Chasing:
 			Debug("Enemy State: Chasing");
+			Chasing();
 		EnemyState.Attacking:
 			Debug("Enemy State: Attacking");
 		EnemyState.Dead:
@@ -76,8 +118,6 @@ func HandleState():
 			
 func LookingForPlayer():
 #
-	Debug("Enemy: Looking For Player");
-	
 	if(IsPlayerInChasingRange()):
 	#
 		Debug("Enemy: Player Found");
@@ -88,22 +128,35 @@ func LookingForPlayer():
 	
 func Chasing():
 #
-	if(IsPlayerInAttackRange()):
+	if (IsPlayerInAttackRange()):
 	#
-		Debug("Enemy: No Player in ChasingRange");
 		currentState = EnemyState.Attacking;
+	#
+	elif (!IsPlayerInChasingRange()):
+	#
+		currentState = EnemyState.Idle;
 	#
 	else:	
 	#
-		Debug("Enemy: No Player in ChasingRange");
+		direction = GetDirectionTowardsPlayer();
 	#
 # Chasing() 
 
 func IsPlayerInChasingRange() -> bool:
-	return false;
+#
+	var playerPosition = GetPlayerPosition();
+	var distanceToPlayer = playerPosition.distance_to(position);
+	
+	return distanceToPlayer <= chasingRange;
+#
 
 func IsPlayerInAttackRange() -> bool:
-	return false;
+#
+	var playerPosition = GetPlayerPosition();
+	var distanceToPlayer = playerPosition.distance_to(position);
+	
+	return distanceToPlayer <= attackRange;
+#
 	
 func StartAttacking():
 #

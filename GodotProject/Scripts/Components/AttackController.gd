@@ -41,26 +41,8 @@ func _ready():
 	swooshDown.animation_finished.connect(OnAnimationFinished);
 #
 
-func _process(_delta):
-#
-	for i in enemiesOnTheRight.size():
-		print("Right: " + enemiesOnTheRight[i].name);
-
-	for i in enemiesOnTheLeft.size():
-		print("Left: " + enemiesOnTheLeft[i].name);
-		
-	for i in enemiesAbove.size():
-		print("Up: " + enemiesAbove[i].name);
-		
-	for i in enemiesBelow.size():
-		print("Down: " + enemiesBelow[i].name);
-	pass
-#
-
 func Attack(direction: Vector2):
 #
-	print("Attack");
-
 	match(Type):
 	#
 		AttackType.Melee:
