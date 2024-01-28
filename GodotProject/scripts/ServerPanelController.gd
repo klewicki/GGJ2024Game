@@ -1,5 +1,5 @@
 class_name ServerPanelController
-extends Node
+extends Panel
 
 @export
 var GameplayScene : PackedScene

@@ -18,7 +18,8 @@ func ServerButtonClicked():
 	var serverInstance = ServerPrefab.instantiate();
 	get_tree().root.add_child(serverInstance);
 	var server = serverInstance as Server;
-	server.PanelController = ServerPanel.get_script() as ServerPanelController
+	var serverPanelController = ServerPanel as ServerPanelController;
+	server.PanelController = serverPanelController;
 	ServerPanel.set_process(true);
 	ServerPanel.show();
 	
@@ -31,7 +32,8 @@ func ClientButtonClicked():
 	var clientInstance = ClientPrefab.instantiate();
 	get_tree().root.add_child(clientInstance);
 	var client = clientInstance as Client;
-	client.PanelController = ClientPanel.get_script() as ClientPanelController
+	var clientPanelController = ClientPanel as ClientPanelController;
+	client.PanelController = clientPanelController;
 	ClientPanel.set_process(true);
 	ClientPanel.show();
 	client.Start();
