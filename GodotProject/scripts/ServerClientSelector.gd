@@ -22,6 +22,7 @@ func ServerButtonClicked():
 	server.PanelController = serverPanelController;
 	ServerPanel.set_process(true);
 	ServerPanel.show();
+	server.Start()
 	
 	ClientServerSelectionPanel.set_process(false);
 	ClientServerSelectionPanel.hide();

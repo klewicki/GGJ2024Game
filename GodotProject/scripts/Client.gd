@@ -38,3 +38,20 @@ func DisplayDebugMessage(message : String):
 		PanelController.DisplayDebugMessage(message);
 	else:
 		print("PanelController is null in Client!");
+		
+func UsePower(powerId : int):
+	#TODO logic
+	
+	print("Power activated! Id " + str(powerId));
+	return;
+		
+@rpc()
+func EnablePower(powerId : int):
+	#TODO: logic
+	print("Power enabled! Id " + str(powerId));
+	return;
+	
+@rpc()
+func DiablePower(powerId : int):
+	print("Power disabled! Id " + str(powerId));
+	return;
