@@ -92,7 +92,7 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Start game"
 
-[node name="ClientPanel" type="Panel" parent="." node_paths=PackedStringArray("DebugLabel")]
+[node name="ClientPanel" type="Panel" parent="." node_paths=PackedStringArray("DebugLabel", "Power0Button", "Power1Button", "Power2Button")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -102,6 +102,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_88563")
 DebugLabel = NodePath("VBoxContainer/DebugLabel")
+Power0Button = NodePath("VBoxContainer/Power0Button")
+Power1Button = NodePath("VBoxContainer/Power1Button")
+Power2Button = NodePath("VBoxContainer/Power2Button")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ClientPanel"]
 layout_mode = 1
@@ -111,6 +114,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Power0Button" type="Button" parent="ClientPanel/VBoxContainer"]
+layout_mode = 2
+text = "Power 0"
+
+[node name="Power1Button" type="Button" parent="ClientPanel/VBoxContainer"]
+layout_mode = 2
+text = "Power 1"
+
+[node name="Power2Button" type="Button" parent="ClientPanel/VBoxContainer"]
+layout_mode = 2
+text = "Power 2"
+
 [node name="DebugLabel" type="Label" parent="ClientPanel/VBoxContainer"]
 layout_mode = 2
 text = "Debug log:
@@ -119,3 +134,6 @@ text = "Debug log:
 [connection signal="button_up" from="ClientServerSelectionPanel/ClientServerSelectionPanelContainer/ServerButton" to="ClientServerSelectionPanel" method="ServerButtonClicked"]
 [connection signal="button_up" from="ClientServerSelectionPanel/ClientServerSelectionPanelContainer/ClientButton" to="ClientServerSelectionPanel" method="ClientButtonClicked"]
 [connection signal="button_up" from="ServerPanel/ServerPanelVBoxContainer/StartGameButton" to="ServerPanel" method="StartGameClicked"]
+[connection signal="button_up" from="ClientPanel/VBoxContainer/Power0Button" to="ClientPanel" method="UsePower" binds= [0]]
+[connection signal="button_up" from="ClientPanel/VBoxContainer/Power1Button" to="ClientPanel" method="UsePower" binds= [1]]
+[connection signal="button_up" from="ClientPanel/VBoxContainer/Power2Button" to="ClientPanel" method="UsePower" binds= [2]]

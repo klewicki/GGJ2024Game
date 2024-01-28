@@ -35,6 +35,7 @@ func ClientButtonClicked():
 	var client = clientInstance as Client;
 	var clientPanelController = ClientPanel as ClientPanelController;
 	client.PanelController = clientPanelController;
+	clientPanelController.ClientInstance = client;
 	ClientPanel.set_process(true);
 	ClientPanel.show();
 	client.Start();

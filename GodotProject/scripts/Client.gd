@@ -40,9 +40,9 @@ func DisplayDebugMessage(message : String):
 		print("PanelController is null in Client!");
 		
 func UsePower(powerId : int):
-	#TODO logic
-	
 	print("Power activated! Id " + str(powerId));
+	#does not work because this needs non static reference
+	#Server.UsePower(powerId).rpc_id(1); #the server is always id 1
 	return;
 		
 @rpc()
