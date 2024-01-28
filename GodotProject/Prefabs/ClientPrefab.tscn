@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmm1atu8aj5wx"]
-
-[ext_resource type="Script" path="res://Scripts/Client.gd" id="1_3wkf8"]
-
-[node name="ClientPrefab" type="Node"]
-script = ExtResource("1_3wkf8")
