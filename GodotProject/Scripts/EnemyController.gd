@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-enum EnemyState {None, Idle, Chasing, Attacking, Dead}
+enum EnemyState {None, Idle, Chasing, Attacking, Hurt, Dead}
 enum EnemyType {Melee, Range}
 
 @export var debugStates: bool
@@ -19,6 +19,9 @@ enum EnemyType {Melee, Range}
 @onready var moveController = $MoveController 
 @onready var attackTimer = $AttackTimer # get_node("/AttackTimer")
 @onready var healthController = $HealthController
+@onready var animatedSprite = $AnimatedSprite2D
+
+var wasStopped = false
 
 var direction = Vector2.ZERO
 
@@ -27,6 +30,10 @@ func _ready():
 	attackTimer.wait_time = AttackRate;
 	attackTimer.timeout.connect(Attack);
 	currentState = EnemyState.Idle;
+	
+	healthController.HealthSubtracted.connect(OnDamageReceived);
+	healthController.HealthDepleted.connect(OnHealthDepleted);
+	
 # _ready()
 
 func _process(delta):
@@ -34,7 +41,17 @@ func _process(delta):
 	pass
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
-	state.linear_velocity = moveController.GetVelocityForDirection(direction);
+	if(currentState == EnemyState.Hurt && !wasStopped):
+	#
+		wasStopped = true;
+		state.linear_velocity = Vector2(0,0);
+	#
+	
+	if(currentState != EnemyState.Hurt):
+	#
+		wasStopped = false;
+		state.linear_velocity = moveController.GetVelocityForDirection(direction);
+	#
 	
 func HandleState():
 #
@@ -112,3 +129,24 @@ func Debug(text: String):
 		print(text);
 # Debug() 
 
+func OnHealthDepleted():
+#
+	currentState = EnemyState.Dead;
+	
+	queue_free();
+#
+
+func OnDamageReceived():
+#
+	print("Damage received!")
+
+	var previousState = currentState;
+	currentState = EnemyState.Hurt;
+	
+	animatedSprite.modulate = Color(1, 0, 0, 1);
+	
+	await get_tree().create_timer(0.2).timeout
+	
+	animatedSprite.modulate = Color(1, 1, 1, 1);
+	currentState = previousState;
+#

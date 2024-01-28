@@ -3,6 +3,7 @@ extends Node
 enum AttackType {Melee, Range}
 
 @export var Damage: float = 10;
+@export var PushForce: float = 10;
 @export var Type: AttackType;
 
 var enemiesOnTheLeft: Array[Node2D];
@@ -73,30 +74,37 @@ func MeleeAttack(direction: Vector2):
 #
 	if(direction.x > 0):
 	#
-		DealDamageToEnemies(enemiesOnTheRight);
+		DealDamageToEnemies(enemiesOnTheRight, direction);
 		
 		swooshRight.animation = "Swoosh";
 		swooshRight.play();
 	#
 	elif(direction.x < 0):
 	#
-		DealDamageToEnemies(enemiesOnTheLeft);
+		DealDamageToEnemies(enemiesOnTheLeft, direction);
 	#
 	elif(direction.y < 0):
 	#
-		DealDamageToEnemies(enemiesAbove);
+		DealDamageToEnemies(enemiesAbove, direction);
 	#
 	elif(direction.y > 0):
 	#
-		DealDamageToEnemies(enemiesBelow);
+		DealDamageToEnemies(enemiesBelow, direction);
 	#
 #
 
-func DealDamageToEnemies(enemies: Array[Node2D]):
+func DealDamageToEnemies(enemies: Array[Node2D], direction: Vector2):
 #
 	for i in enemies.size():
 	#
+		var enemy = enemies[i];
 		var enemyHealth = enemies[i].get_node("./HealthController");
+	
+		if(enemy is RigidBody2D):
+		#
+			print(direction * PushForce);
+			enemy.apply_force(direction * PushForce);
+		#
 		
 		if(enemyHealth != null):
 		#

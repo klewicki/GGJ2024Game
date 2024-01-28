@@ -1,6 +1,7 @@
 extends Node
 
 signal HealthDepleted
+signal HealthSubtracted
 
 @export var MaxHealth: float = 100;
 
@@ -17,6 +18,8 @@ func SubtractHealth(amount: float):
 	CurrentHealth -= amount;
 
 	print("Subtracting Health! Current Health: " + str(CurrentHealth));
+
+	HealthSubtracted.emit();
 		
 	if(CurrentHealth <= 0):
 	#
