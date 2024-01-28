@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://clg2ah2j3c12d"]
+
+[ext_resource type="Script" path="res://Scripts/Components/RemoteInputController.gd" id="1_dfg7b"]
+
+[node name="InputController" type="Node2D"]
+script = ExtResource("1_dfg7b")
