@@ -15,6 +15,8 @@ var enemiesBelow: Array[Node2D];
 @onready var attackBoxUp = $AttackBoxUp
 @onready var attackBoxDown = $AttackBoxDown
 
+@onready var swooshRight = $SwooshRight
+
 func _ready():
 #
 	attackBoxRight.body_entered.connect(OnAttackBoxRightEnter);
@@ -28,6 +30,8 @@ func _ready():
 	
 	attackBoxDown.body_entered.connect(OnAttackBoxDownEnter);
 	attackBoxDown.body_exited.connect(OnAttackBoxDownExit);
+	
+	swooshRight.animation_finished.connect(OnAnimationFinished);
 #
 
 func _process(_delta):
@@ -59,11 +63,20 @@ func Attack(direction: Vector2):
 	#
 #
 
+func OnAnimationFinished():
+#
+	swooshRight.animation = "NoSwoosh";
+	swooshRight.stop();
+#
+
 func MeleeAttack(direction: Vector2):
 #
 	if(direction.x > 0):
 	#
 		DealDamageToEnemies(enemiesOnTheRight);
+		
+		swooshRight.animation = "Swoosh";
+		swooshRight.play();
 	#
 	elif(direction.x < 0):
 	#
