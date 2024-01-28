@@ -16,5 +16,5 @@ func StartGameClicked():
 	
 func UpdatePlayerCount(newCount : int):
 	print("Player count updated to " + str(newCount));
-	PlayerCountLabel.text = str(newCount);
+	PlayerCountLabel.text = "Current players: " + str(newCount);
 

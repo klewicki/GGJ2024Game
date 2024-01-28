@@ -65,7 +65,7 @@ grow_vertical = 2
 script = ExtResource("2_os6k0")
 GameplayScene = ExtResource("4_xbs5o")
 ServerPanel = NodePath(".")
-PlayerCountLabel = NodePath("ServerPanelVBoxContainer/InfoLabel")
+PlayerCountLabel = NodePath("ServerPanelVBoxContainer/PlayerCountLabel")
 
 [node name="ServerPanelVBoxContainer" type="VBoxContainer" parent="ServerPanel"]
 layout_mode = 1
