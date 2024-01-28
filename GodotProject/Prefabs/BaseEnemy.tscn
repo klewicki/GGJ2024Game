@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0rj7gi4cryxq"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyController.gd" id="1_12d8r"]
+[ext_resource type="Texture2D" uid="uid://cx30bhomyh43s" path="res://Sprites/Characters/Player.png" id="1_iosvw"]
+[ext_resource type="PackedScene" uid="uid://chsdx2k7j1msh" path="res://Components/MoveController.tscn" id="3_mh252"]
+[ext_resource type="PackedScene" uid="uid://8j6spyu4rhxh" path="res://Components/HealthController.tscn" id="4_d2gql"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wmpkh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_iosvw")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5vn0s"]
+radius = 8.0
+
+[node name="BaseEnemy" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 7
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_12d8r")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wmpkh")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_5vn0s")
+
+[node name="MoveController" parent="." instance=ExtResource("3_mh252")]
+
+[node name="HealthController" parent="." instance=ExtResource("4_d2gql")]
+
+[node name="AttackTimer" type="Timer" parent="."]

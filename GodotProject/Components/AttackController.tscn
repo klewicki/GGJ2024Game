@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://be56goflb0lrn"]
+
+[ext_resource type="Script" path="res://Scripts/Components/AttackController.gd" id="1_rov1y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dquio"]
+size = Vector2(8, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucnq6"]
+size = Vector2(8, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ossgn"]
+size = Vector2(22, 8)
+
+[node name="AttackController" type="Node2D"]
+script = ExtResource("1_rov1y")
+
+[node name="AttackBoxRight" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="AttackBoxShape" type="CollisionShape2D" parent="AttackBoxRight"]
+position = Vector2(15, 0)
+shape = SubResource("RectangleShape2D_dquio")
+
+[node name="AttackBoxLeft" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="AttackBoxShape" type="CollisionShape2D" parent="AttackBoxLeft"]
+position = Vector2(-15, 0)
+shape = SubResource("RectangleShape2D_ucnq6")
+
+[node name="AttackBoxUp" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="AttackBoxShape" type="CollisionShape2D" parent="AttackBoxUp"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_ossgn")
+
+[node name="AttackBoxDown" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="AttackBoxShape" type="CollisionShape2D" parent="AttackBoxDown"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_ossgn")

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtgidhlov7ef4"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_s85ai"]
+[ext_resource type="Texture2D" uid="uid://cx30bhomyh43s" path="res://Sprites/Characters/Player.png" id="2_6n832"]
+[ext_resource type="PackedScene" uid="uid://chsdx2k7j1msh" path="res://Components/MoveController.tscn" id="3_y02p8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rtbbd"]
+radius = 8.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1686e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6n832")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Player" type="RigidBody2D"]
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_s85ai")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_rtbbd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1686e")
+animation = &"Idle"
+
+[node name="MoveController" parent="." instance=ExtResource("3_y02p8")]
+Speed = null
+NormalizeDirection = null
