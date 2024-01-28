@@ -8,9 +8,18 @@ var lastDirection = Vector2.ZERO;
 @onready var attackController = $AttackController
 @onready var animatedSprite = $AnimatedSprite2D
 @onready var inputController = $InputController
+@onready var healthController = $HealthController
+
+var receivingDamage: bool = false;
+var wasStopped: bool = false;
 
 func _ready():
+#
 	lastDirection = Vector2.DOWN;
+
+	healthController.HealthSubtracted.connect(OnDamageReceived);
+	healthController.HealthDepleted.connect(OnHealthDepleted);
+#
 
 func _process(_delta):
 #
@@ -22,7 +31,17 @@ func _process(_delta):
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 #
-	state.linear_velocity = moveController.GetVelocityForDirection(direction);
+	if(receivingDamage && !wasStopped):
+	#
+		wasStopped = true;
+		state.linear_velocity = Vector2.ZERO;
+	#
+	
+	if(!receivingDamage):
+	#
+		wasStopped = false;
+		state.linear_velocity = moveController.GetVelocityForDirection(direction);
+	#
 # _integrate_forces
 
 func UpdateDirectionInput():
@@ -44,3 +63,24 @@ func HandleAttack():
 		attackController.Attack(lastDirection);
 		
 # HandleAttack()
+
+func OnHealthDepleted():
+#
+	#Game Over
+	
+	queue_free();
+#
+
+func OnDamageReceived():
+#
+	print("Damage received!")
+	
+	receivingDamage = true;
+	animatedSprite.modulate = Color(1, 0, 0, 1);
+	
+	await get_tree().create_timer(0.2).timeout
+	
+	receivingDamage = false;
+	animatedSprite.modulate = Color(1, 1, 1, 1);
+#
+

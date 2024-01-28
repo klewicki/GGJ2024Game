@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c4nish8amg1xm" path="res://Tilemapss/SimpleDungeon.tscn" id="1_3tyhg"]
 [ext_resource type="PackedScene" uid="uid://dtgidhlov7ef4" path="res://Prefabs/Player.tscn" id="2_ebjet"]
-[ext_resource type="PackedScene" uid="uid://d0rj7gi4cryxq" path="res://Prefabs/BaseEnemy.tscn" id="3_cljq4"]
+[ext_resource type="PackedScene" uid="uid://ckg3n6hylpj6d" path="res://Prefabs/RemotePlayer.tscn" id="3_rju3o"]
 
 [node name="Gameplay" type="Node2D"]
 
@@ -15,9 +15,5 @@ position = Vector2(-112, -72)
 z_index = 100
 position = Vector2(-80, -32)
 
-[node name="BaseEnemy" parent="." instance=ExtResource("3_cljq4")]
-position = Vector2(80, 40)
-scale = Vector2(0.981982, 1.00308)
-debugStates = true
-chasingRange = 80.0
-attackRange = 10.0
+[node name="Player2" parent="." instance=ExtResource("3_rju3o")]
+position = Vector2(64, 24)
