@@ -424,6 +424,7 @@ texture = ExtResource("1_yon6s")
 
 [sub_resource type="TileSet" id="TileSet_6xnkp"]
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 7
 sources/1 = SubResource("TileSetAtlasSource_rhfbk")
 
 [node name="SimpleDungeon" type="TileMap"]

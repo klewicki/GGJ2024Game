@@ -1,12 +1,11 @@
 extends RigidBody2D
 
-
 var viewportRect = Vector2.ZERO;
 var direction = Vector2.ZERO;
 
 @onready var moveController = $MoveController 
 
-func _process(delta):
+func _process(_delta):
 #
 	UpdateDirectionInput();
 	HandleAttack();

@@ -16,9 +16,3 @@ z_index = 100
 
 [node name="BaseEnemy" parent="." instance=ExtResource("3_cljq4")]
 position = Vector2(48, 16)
-debugStates = null
-currentState = null
-enemyType = null
-canSeePlayer = null
-chasingRange = null
-attackRange = null
