@@ -7,6 +7,7 @@ var lastDirection = Vector2.ZERO;
 @onready var moveController = $MoveController 
 @onready var attackController = $AttackController
 @onready var animatedSprite = $AnimatedSprite2D
+@onready var inputController = $InputController
 
 func _ready():
 	lastDirection = Vector2.DOWN;
@@ -26,19 +27,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 
 func UpdateDirectionInput():
 #
-	direction = Vector2.ZERO;
-
-	if(Input.is_action_pressed("MoveUp")):
-		direction.y -= 1;
-		
-	if(Input.is_action_pressed("MoveDown")):
-		direction.y += 1;
-	
-	if(Input.is_action_pressed("MoveLeft")):
-		direction.x -= 1;
-	
-	if(Input.is_action_pressed("MoveRight")):
-		direction.x += 1;
+	direction = inputController.GetDirectionInput();
 		
 	if(direction.x != 0 || direction.y != 0):
 		lastDirection = direction;
@@ -46,7 +35,7 @@ func UpdateDirectionInput():
 # UpdateDirectionInput()
 
 func GetAttackInput() -> bool:
-	return Input.is_action_just_pressed("Attack")
+	return inputController.GetAttackInputPressed();
 
 	
 func HandleAttack():

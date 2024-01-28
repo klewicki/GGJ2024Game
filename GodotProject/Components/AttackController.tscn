@@ -96,12 +96,14 @@ animation = &"NoSwoosh"
 position = Vector2(0, 18)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_kc6px")
+animation = &"NoSwoosh"
 
 [node name="SwooshLeft" type="AnimatedSprite2D" parent="."]
 position = Vector2(-17, 0)
 rotation = 3.14159
 scale = Vector2(1, -1)
 sprite_frames = SubResource("SpriteFrames_kc6px")
+animation = &"NoSwoosh"
 
 [node name="SwooshUp" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17)
