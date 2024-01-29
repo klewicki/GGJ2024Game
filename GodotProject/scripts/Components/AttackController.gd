@@ -4,7 +4,9 @@ enum AttackType {Melee, Range}
 
 @export var Damage: float = 10;
 @export var PushForce: float = 10;
-@export var Type: AttackType;
+@export var Type: AttackType = AttackType.Melee;
+@export var PlaySwooshAnim: bool = true;
+@export var FindNearbyTargets: bool = true;
 
 var enemiesOnTheLeft: Array[Node2D];
 var enemiesOnTheRight: Array[Node2D];
@@ -23,22 +25,32 @@ var enemiesBelow: Array[Node2D];
 
 func _ready():
 #
-	attackBoxRight.body_entered.connect(OnAttackBoxRightEnter);
-	attackBoxRight.body_exited.connect(OnAttackBoxRightExit);
+	if(FindNearbyTargets):
+	#
+		attackBoxRight.body_entered.connect(OnAttackBoxRightEnter);
+		attackBoxRight.body_exited.connect(OnAttackBoxRightExit);
+		
+		attackBoxLeft.body_entered.connect(OnAttackBoxLeftEnter);
+		attackBoxLeft.body_exited.connect(OnAttackBoxLeftExit);
+		
+		attackBoxUp.body_entered.connect(OnAttackBoxUpEnter);
+		attackBoxUp.body_exited.connect(OnAttackBoxUpExit);
+		
+		attackBoxDown.body_entered.connect(OnAttackBoxDownEnter);
+		attackBoxDown.body_exited.connect(OnAttackBoxDownExit);
+	#
 	
-	attackBoxLeft.body_entered.connect(OnAttackBoxLeftEnter);
-	attackBoxLeft.body_exited.connect(OnAttackBoxLeftExit);
+	if(swooshRight != null):
+		swooshRight.animation_finished.connect(OnAnimationFinished);
 	
-	attackBoxUp.body_entered.connect(OnAttackBoxUpEnter);
-	attackBoxUp.body_exited.connect(OnAttackBoxUpExit);
+	if(swooshLeft != null):
+		swooshLeft.animation_finished.connect(OnAnimationFinished);
 	
-	attackBoxDown.body_entered.connect(OnAttackBoxDownEnter);
-	attackBoxDown.body_exited.connect(OnAttackBoxDownExit);
+	if(swooshUp != null):
+		swooshUp.animation_finished.connect(OnAnimationFinished);
 	
-	swooshRight.animation_finished.connect(OnAnimationFinished);
-	swooshLeft.animation_finished.connect(OnAnimationFinished);
-	swooshUp.animation_finished.connect(OnAnimationFinished);
-	swooshDown.animation_finished.connect(OnAnimationFinished);
+	if(swooshDown != null):
+		swooshDown.animation_finished.connect(OnAnimationFinished);
 #
 
 func Attack(direction: Vector2):
@@ -52,54 +64,99 @@ func Attack(direction: Vector2):
 	#
 #
 
+func AttackTargets(targets: Array[Node2D], direction: Vector2):
+#
+	match(Type):
+	#
+		AttackType.Melee:
+			MeleeAttack(direction, targets);
+		AttackType.Range:		
+			RangeAttack(direction);
+	#
+#
+
 func OnAnimationFinished():
 #
+	if(!PlaySwooshAnim):
+		return;
+		
 	var noSwooshAnim = "NoSwoosh";
 
-	swooshRight.animation = noSwooshAnim;
-	swooshRight.stop();
+	if(swooshRight != null):
+	#		
+		swooshRight.animation = noSwooshAnim;
+		swooshRight.stop();
+	#
 	
-	swooshLeft.animation = noSwooshAnim;
-	swooshLeft.stop();
+	if(swooshRight != null):
+	#
+		swooshLeft.animation = noSwooshAnim;
+		swooshLeft.stop();
+	#
 	
-	swooshUp.animation = noSwooshAnim;
-	swooshUp.stop();
+	if(swooshRight != null):
+	#
+		swooshUp.animation = noSwooshAnim;
+		swooshUp.stop();
+	#
 	
-	swooshDown.animation = noSwooshAnim;
-	swooshDown.stop();
+	if(swooshRight != null):
+	#
+		swooshDown.animation = noSwooshAnim;
+		swooshDown.stop();
+	#
 #
 
 func PlaySwoosh(swoosh: AnimatedSprite2D):
 #
+	if(swoosh == null):
+		return;
+
 	swoosh.animation = "Swoosh";
 	swoosh.play();
 #
 
-func MeleeAttack(direction: Vector2):
+func MeleeAttack(direction: Vector2, targets: Array[Node2D] = []):
 #
 	if(direction.x > 0):
 	#
-		DealDamageToEnemies(enemiesOnTheRight, direction);
-		
-		PlaySwoosh(swooshRight);
+		if(targets.size() == 0):
+			DealDamageToEnemies(enemiesOnTheRight, direction);
+		else:
+			DealDamageToEnemies(targets, direction);
+			
+		if(PlaySwooshAnim):
+			PlaySwoosh(swooshRight);
 	#
 	elif(direction.x < 0):
 	#
-		DealDamageToEnemies(enemiesOnTheLeft, direction);
+		if(targets.size() == 0):
+			DealDamageToEnemies(enemiesOnTheLeft, direction);
+		else:
+			DealDamageToEnemies(targets, direction);
 		
-		PlaySwoosh(swooshLeft);
+		if(PlaySwooshAnim):
+			PlaySwoosh(swooshLeft);
 	#
 	elif(direction.y < 0):
 	#
-		DealDamageToEnemies(enemiesAbove, direction);
+		if(targets.size() == 0):
+			DealDamageToEnemies(enemiesAbove, direction);
+		else:
+			DealDamageToEnemies(targets, direction);
 		
-		PlaySwoosh(swooshUp);
+		if(PlaySwooshAnim):	
+			PlaySwoosh(swooshUp);
 	#
 	elif(direction.y > 0):
 	#
-		DealDamageToEnemies(enemiesBelow, direction);
+		if(targets.size() == 0):
+			DealDamageToEnemies(enemiesBelow, direction);
+		else:
+			DealDamageToEnemies(targets, direction);
 		
-		PlaySwoosh(swooshDown);
+		if(PlaySwooshAnim):	
+			PlaySwoosh(swooshDown);
 	#
 #
 
@@ -111,15 +168,10 @@ func DealDamageToEnemies(enemies: Array[Node2D], direction: Vector2):
 		var enemyHealth = enemies[i].get_node("./HealthController");
 	
 		if(enemy is RigidBody2D):
-		#
-			print(direction * PushForce);0
 			enemy.apply_force(direction * PushForce);
-		#
 		
 		if(enemyHealth != null):
-		#
 			enemyHealth.SubtractHealth(Damage);
-		#
 	#
 #
 

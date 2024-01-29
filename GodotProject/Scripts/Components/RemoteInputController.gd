@@ -8,7 +8,7 @@ func GetDirectionInput() -> Vector2:
 #
 	#This needs to return 
 	
-	#Vector2(0,0,) when player is not holding any movement keys
+	#Vector2(0,0) when player is not holding any movement keys
 	#Vector2(1, 0) when player holds move right
 	#Vector2(-1, 0) when player holds move left
 	#Vector2(0, -1) when player holds move up

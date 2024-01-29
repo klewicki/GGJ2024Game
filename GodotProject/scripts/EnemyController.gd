@@ -8,11 +8,6 @@ enum EnemyType {Melee, Range}
 @export var AttackRate: int
 @export var Damage: float
 
-@export var currentState: EnemyState 
-@export var enemyType: EnemyType
-
-@export var canSeePlayer: bool
-
 @export var chasingRange: float
 @export var attackRange: float
 
@@ -20,11 +15,12 @@ enum EnemyType {Melee, Range}
 @onready var attackTimer = $AttackTimer # get_node("/AttackTimer")
 @onready var healthController = $HealthController
 @onready var animatedSprite = $AnimatedSprite2D
+@onready var attackController = $AttackController
 
 var player: Node2D
-
+var currentState: EnemyState 
 var wasStopped = false
-
+var isAttacking = false;
 var direction = Vector2.ZERO
 
 func _ready():
@@ -41,6 +37,7 @@ func _ready():
 func _process(delta):
 #
 	HandleState();
+	
 	pass
 #
 
@@ -58,8 +55,6 @@ func _physics_process(delta):
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 #
-	print("Integrate Forces");
-
 	if(currentState == EnemyState.Hurt && !wasStopped):
 	#
 		wasStopped = true;
@@ -68,8 +63,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	
 	if(currentState != EnemyState.Hurt):
 	#
-		print("Not Hurt");
-	
 		wasStopped = false;
 		
 		if(currentState == EnemyState.Chasing):
@@ -81,7 +74,17 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 func GetPlayerPosition() -> Vector2:
 #
 	if(player == null):
-		player = get_tree().get_nodes_in_group("Player")[0];
+	#
+		var playerGroupNodes = get_tree().get_nodes_in_group("Player");
+	
+		if(playerGroupNodes.size() == 0):
+			return Vector2.ZERO;
+			
+		player = playerGroupNodes[0];
+	#
+	
+	if(player == null):
+		return Vector2.ZERO;
 	
 	return player.global_position;
 #
@@ -111,6 +114,7 @@ func HandleState():
 			Chasing();
 		EnemyState.Attacking:
 			Debug("Enemy State: Attacking");
+			Attacking();
 		EnemyState.Dead:
 			Debug("Enemy State: Dead");
 	#
@@ -142,6 +146,18 @@ func Chasing():
 	#
 # Chasing() 
 
+func Attacking():
+#
+	if(!isAttacking):
+		StartAttacking();
+
+	if (!IsPlayerInChasingRange()):
+	#
+		StopAttacking();
+		currentState = EnemyState.Chasing;
+	#
+#	
+
 func IsPlayerInChasingRange() -> bool:
 #
 	var playerPosition = GetPlayerPosition();
@@ -160,11 +176,13 @@ func IsPlayerInAttackRange() -> bool:
 	
 func StartAttacking():
 #
+	isAttacking = true;
 	attackTimer.start();
 #	
 
 func StopAttacking():
 #
+	isAttacking = false;
 	attackTimer.stop();
 #
 
@@ -191,8 +209,6 @@ func OnHealthDepleted():
 
 func OnDamageReceived():
 #
-	print("Damage received!")
-
 	var previousState = currentState;
 	currentState = EnemyState.Hurt;
 	

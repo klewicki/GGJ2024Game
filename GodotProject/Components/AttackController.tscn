@@ -57,6 +57,8 @@ script = ExtResource("1_rov1y")
 Damage = null
 PushForce = 2000.0
 Type = null
+PlaySwooshAnim = null
+FindNearbyTargets = null
 
 [node name="AttackBoxRight" type="Area2D" parent="."]
 collision_mask = 6

@@ -71,6 +71,8 @@ script = ExtResource("6_clvgg")
 [node name="HealthController" parent="." instance=ExtResource("8_mfp3e")]
 
 [node name="AttackController" parent="." instance=ExtResource("9_mre6t")]
+PlaySwooshAnim = null
+FindNearbyTargets = null
 
 [node name="InputController" parent="." instance=ExtResource("10_6g6e6")]
 position = Vector2(256.569, -19.1071)
