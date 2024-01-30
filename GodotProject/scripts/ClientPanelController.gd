@@ -33,25 +33,70 @@ func SetPowerButtonEnabled(button : int, enabled : bool):
 
 
 func _on_up_texture_button_button_up():
-	print("Up pressed!");
-	pass # Replace with function body.
+	print("Up up!");
+	ClientServerInstance.SetClientButtonPressedState(ClientServer.EClientButtons.UP, false);
 
 
 func _on_down_texture_button_button_up():
-	print("Down pressed!");
-	pass # Replace with function body.
+	print("Down up!");
+	ClientServerInstance.SetClientButtonPressedState(ClientServer.EClientButtons.DOWN, false);
 
 
 func _on_left_texture_button_button_up():
-	print("Left pressed!");
-	pass # Replace with function body.
+	print("Left up!");
+	ClientServerInstance.SetClientButtonPressedState(ClientServer.EClientButtons.LEFT, false);
 
 
 func _on_right_texture_button_button_up():
-	print("Right pressed!");
-	pass # Replace with function body.
+	print("Right up!");
+	ClientServerInstance.SetClientButtonPressedState(ClientServer.EClientButtons.RIGHT, false)
 
 
 func _on_attack_texture_button_button_up():
-	print("Attack pressed!");
+	print("Attack up!");
+	ClientServerInstance.SetClientButtonPressedState(ClientServer.EClientButtons.ATTACK, false)
+
+
+func _on_up_texture_button_pressed():
 	pass # Replace with function body.
+
+
+func _on_down_texture_button_pressed():
+	pass # Replace with function body.
+
+
+func _on_left_texture_button_pressed():
+	pass # Replace with function body.
+
+
+func _on_right_texture_button_pressed():
+	pass # Replace with function body.
+
+
+func _on_attack_texture_button_pressed():
+	pass # Replace with function body.
+
+
+func _on_up_texture_button_button_down():
+	print("Up down!");
+	ClientServerInstance.SetClientButtonPressedState(ClientServer.EClientButtons.UP, true);
+
+
+func _on_down_texture_button_button_down():
+	print("Down down!");
+	ClientServerInstance.SetClientButtonPressedState(ClientServer.EClientButtons.DOWN, true);
+
+
+func _on_left_texture_button_button_down():
+	print("Left down!");
+	ClientServerInstance.SetClientButtonPressedState(ClientServer.EClientButtons.LEFT, true);
+
+
+func _on_right_texture_button_button_down():
+	print("Right down!");
+	ClientServerInstance.SetClientButtonPressedState(ClientServer.EClientButtons.RIGHT, true);
+
+
+func _on_attack_texture_button_button_down():
+	print("Attack down!");
+	ClientServerInstance.SetClientButtonPressedState(ClientServer.EClientButtons.ATTACK, true);
