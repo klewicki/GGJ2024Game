@@ -5,6 +5,7 @@ const PORT : int =  5555;
 const MAX_CLIENTS : int = 5;
 
 #common stuff
+enum EClientButtons {UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3, ATTACK = 4}
 var Peer : ENetMultiplayerPeer;
 
 #client side stuff
@@ -59,6 +60,10 @@ func UsePower(powerId : int):
 	UsePowerRPC.rpc_id(1, powerId); #the server is always id 1
 	print("RPC sent for power use!");
 	return;
+	
+func SetClientButtonPressedState(button : EClientButtons, pressed : bool):
+	ButtonStateRPC.rpc_id(1, button, pressed); #the server is always id 1
+	return;
 		
 @rpc()
 func EnablePower(powerId : int):
@@ -104,5 +109,11 @@ func UsePowerRPC(powerId : int):
 	print("Power " + str(powerId) + " used by player " + str(playerId));
 	var playerIndex = GetPlayerIndex(playerId);
 	PowerUsed.emit(playerIndex, powerId);
+	
+@rpc("any_peer")
+func ButtonStateRPC(button: EClientButtons, pressed : bool):
+	var playerId = multiplayer.get_remote_sender_id();
+	print("Button " + str(button) + "state " + str(pressed) + " by player " + str(playerId));
+	
 
 
