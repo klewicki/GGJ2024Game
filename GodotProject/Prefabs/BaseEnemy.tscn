@@ -45,3 +45,7 @@ shape = SubResource("CircleShape2D_5vn0s")
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="AttackController" parent="." instance=ExtResource("5_jfsll")]
+Damage = 10.0
+Type = 0
+PlaySwooshAnim = true
+FindNearbyTargets = true

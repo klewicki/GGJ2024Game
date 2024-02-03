@@ -54,11 +54,7 @@ animations = [{
 
 [node name="AttackController" type="Node2D"]
 script = ExtResource("1_rov1y")
-Damage = null
 PushForce = 2000.0
-Type = null
-PlaySwooshAnim = null
-FindNearbyTargets = null
 
 [node name="AttackBoxRight" type="Area2D" parent="."]
 collision_mask = 6
@@ -90,7 +86,6 @@ shape = SubResource("RectangleShape2D_ossgn")
 
 [node name="SwooshRight" type="AnimatedSprite2D" parent="."]
 position = Vector2(17, 0)
-scale = Vector2(1, -1)
 sprite_frames = SubResource("SpriteFrames_kc6px")
 animation = &"NoSwoosh"
 
@@ -103,7 +98,6 @@ animation = &"NoSwoosh"
 [node name="SwooshLeft" type="AnimatedSprite2D" parent="."]
 position = Vector2(-17, 0)
 rotation = 3.14159
-scale = Vector2(1, -1)
 sprite_frames = SubResource("SpriteFrames_kc6px")
 animation = &"NoSwoosh"
 

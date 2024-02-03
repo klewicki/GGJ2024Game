@@ -13,6 +13,9 @@ var enemiesOnTheRight: Array[Node2D];
 var enemiesAbove: Array[Node2D];
 var enemiesBelow: Array[Node2D];
 
+signal AttackFinished;
+signal AttackStarted;
+
 @onready var attackBoxRight = $AttackBoxRight
 @onready var attackBoxLeft = $AttackBoxLeft
 @onready var attackBoxUp = $AttackBoxUp
@@ -105,6 +108,8 @@ func OnAnimationFinished():
 		swooshDown.animation = noSwooshAnim;
 		swooshDown.stop();
 	#
+	
+	AttackFinished.emit();
 #
 
 func PlaySwoosh(swoosh: AnimatedSprite2D):
@@ -124,9 +129,13 @@ func MeleeAttack(direction: Vector2, targets: Array[Node2D] = []):
 			DealDamageToEnemies(enemiesOnTheRight, direction);
 		else:
 			DealDamageToEnemies(targets, direction);
+	
+		AttackStarted.emit();
 			
 		if(PlaySwooshAnim):
 			PlaySwoosh(swooshRight);
+		else:
+			AttackFinished.emit();
 	#
 	elif(direction.x < 0):
 	#
@@ -135,8 +144,12 @@ func MeleeAttack(direction: Vector2, targets: Array[Node2D] = []):
 		else:
 			DealDamageToEnemies(targets, direction);
 		
+		AttackStarted.emit();
+		
 		if(PlaySwooshAnim):
 			PlaySwoosh(swooshLeft);
+		else:
+			AttackFinished.emit();
 	#
 	elif(direction.y < 0):
 	#
@@ -145,8 +158,12 @@ func MeleeAttack(direction: Vector2, targets: Array[Node2D] = []):
 		else:
 			DealDamageToEnemies(targets, direction);
 		
+		AttackStarted.emit();
+		
 		if(PlaySwooshAnim):	
 			PlaySwoosh(swooshUp);
+		else:
+			AttackFinished.emit();
 	#
 	elif(direction.y > 0):
 	#
@@ -155,8 +172,12 @@ func MeleeAttack(direction: Vector2, targets: Array[Node2D] = []):
 		else:
 			DealDamageToEnemies(targets, direction);
 		
+		AttackStarted.emit();
+		
 		if(PlaySwooshAnim):	
 			PlaySwoosh(swooshDown);
+		else:
+			AttackFinished.emit();
 	#
 #
 
