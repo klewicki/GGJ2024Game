@@ -1,7 +1,7 @@
 [gd_scene load_steps=62 format=3 uid="uid://dtgidhlov7ef4"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_s85ai"]
-[ext_resource type="Texture2D" uid="uid://cdh65vydpbkqq" path="res://Sprites/Characters/Player/Player_Spritesheet.png" id="2_b6gio"]
+[ext_resource type="Texture2D" uid="uid://cdh65vydpbkqq" path="res://Sprites/Characters/Player_Spritesheet.png" id="2_b6gio"]
 [ext_resource type="PackedScene" uid="uid://chsdx2k7j1msh" path="res://Components/MoveController.tscn" id="3_y02p8"]
 [ext_resource type="PackedScene" uid="uid://8j6spyu4rhxh" path="res://Components/HealthController.tscn" id="4_swtf8"]
 [ext_resource type="PackedScene" uid="uid://be56goflb0lrn" path="res://Components/AttackController.tscn" id="5_t0d7w"]
