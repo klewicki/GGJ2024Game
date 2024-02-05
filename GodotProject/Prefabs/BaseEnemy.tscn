@@ -1,21 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0rj7gi4cryxq"]
+[gd_scene load_steps=7 format=3 uid="uid://d0rj7gi4cryxq"]
 
 [ext_resource type="Script" path="res://Scripts/EnemyController.gd" id="1_12d8r"]
-[ext_resource type="Texture2D" uid="uid://cr217jitxlpdn" path="res://Sprites/Characters/MrNegative.png" id="2_8wjju"]
+[ext_resource type="SpriteFrames" uid="uid://bw8e1ny6tvqer" path="res://Animations/Characters/MrNegative_SpriteFrames.tres" id="2_688ay"]
 [ext_resource type="PackedScene" uid="uid://chsdx2k7j1msh" path="res://Components/MoveController.tscn" id="3_mh252"]
 [ext_resource type="PackedScene" uid="uid://8j6spyu4rhxh" path="res://Components/HealthController.tscn" id="4_d2gql"]
 [ext_resource type="PackedScene" uid="uid://be56goflb0lrn" path="res://Components/AttackController.tscn" id="5_jfsll"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_wmpkh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_8wjju")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 5.0
-}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vn0s"]
 radius = 8.0
@@ -31,8 +20,8 @@ attackRange = 18.0
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_wmpkh")
-animation = &"Idle"
+sprite_frames = ExtResource("2_688ay")
+animation = &"Idle_Down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -45,7 +34,3 @@ shape = SubResource("CircleShape2D_5vn0s")
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="AttackController" parent="." instance=ExtResource("5_jfsll")]
-Damage = 10.0
-Type = 0
-PlaySwooshAnim = true
-FindNearbyTargets = true
